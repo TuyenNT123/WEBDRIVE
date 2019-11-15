@@ -30,7 +30,7 @@ public class XPath {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
-	@Test
+	@Test(enabled = false)
 	public void tc01() {
 		driver.findElement(By.xpath("//div[@class='account-cart-wrapper']//a[@class='skip-link skip-account']"))
 				.click();
@@ -45,7 +45,8 @@ public class XPath {
 		Assert.assertEquals(strWrongURD, strWrongApp);
 
 	}
-	@Test
+
+	@Test(enabled = false)
 	public void tc02() {
 		driver.findElement(By.xpath("//div[@class='account-cart-wrapper']//a[@class='skip-link skip-account']"))
 				.click();
@@ -57,7 +58,8 @@ public class XPath {
 		Assert.assertEquals(strWrongURDEmail, strWrongEmail);
 
 	}
-	@Test
+
+	@Test(enabled = false)
 	public void tc03() {
 //		tuyennt@vnpay.vn 123456
 		driver.findElement(By.xpath("//div[@class='account-cart-wrapper']//a[@class='skip-link skip-account']"))
@@ -71,7 +73,8 @@ public class XPath {
 		Assert.assertEquals(strWrongURDPass, strWrongPass);
 
 	}
-	@Test
+
+	@Test(enabled = false)
 	public void tc04() {
 //		tuyennt@vnpay.vn 123456
 		driver.findElement(By.xpath("//div[@class='account-cart-wrapper']//a[@class='skip-link skip-account']"))
@@ -87,7 +90,7 @@ public class XPath {
 
 	}
 
-	@Test
+	@Test(enabled = false)
 	public void tc05() {
 		String email = "tuyennt@vnpay.vn";
 		String pwd = "123456";
@@ -102,20 +105,21 @@ public class XPath {
 		String strApp = driver.findElement(By.xpath("//p[@class='welcome-msg']")).getText();
 		String strRight = "tuyên Nguyrn Thu";
 		String welcome = "Welcome, ";
-		strApp = strApp.substring(welcome.length(),welcome.length()+strRight.length()).toLowerCase();
+		strApp = strApp.substring(welcome.length(), welcome.length() + strRight.length()).toLowerCase();
 		Assert.assertEquals(strRight.toLowerCase(), strApp);
-		
+
 	}
 
-	@Test
+	@Test(enabled = true)
 	public void tc06() {
-		driver.findElement(By.xpath("//div[@class='account-cart-wrapper']//a[@class='skip-link skip-account']")).click();
+		driver.findElement(By.xpath("//div[@class='account-cart-wrapper']//a[@class='skip-link skip-account']"))
+				.click();
 		driver.findElement(By.xpath("//li[@class='first']//a[@title='My Account']")).click();
 		driver.findElement(By.xpath("//a[@title='Create an Account' and @class='button']")).click();
-		String firstName ="Nguyễn";
+		String firstName = "Nguyễn";
 		String middleName = "Thị";
 		String lastName = "Tuyến";
-		String email = radomInt()+"@vnpay.vn";
+		String email = radomInt() + "@vnpay.vn";
 		String pwd = "123456";
 		String confirmPwd = "123456";
 		driver.findElement(By.xpath("//input[@id='firstname']")).sendKeys(firstName);
@@ -128,25 +132,21 @@ public class XPath {
 		String strShow = driver.findElement(By.xpath("//li[@class='success-msg']//span")).getText();
 		String strEqual = "Thank you for registering with Main Website Store.";
 		Assert.assertEquals(strEqual, strShow);
-		driver.findElement(By.xpath("//div[@class='account-cart-wrapper']//a[@class='skip-link skip-account']")).click();
+		driver.findElement(By.xpath("//div[@class='account-cart-wrapper']//a[@class='skip-link skip-account']"))
+				.click();
 		driver.findElement(By.xpath("//a[@title='Log Out']")).click();
-		String url = driver.getCurrentUrl();
-		if(url=="http://live.demoguru99.com/index.php/customer/account/logoutSuccess/") {
-			driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
-			url = driver.getCurrentUrl();
-		}
-		System.out.println(url);
-		String home = "http://live.demoguru99.com/index.php/";
-		Assert.assertEquals(home, url);
-		
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		String home = "Default welcome msg!";
+		Assert.assertEquals(home.toUpperCase(), driver.findElement(By.xpath("//p[@class='welcome-msg']")).getText());
 
 	}
+
 	public static int radomInt() {
 		Random random = new Random();
 		int n = random.nextInt(99999);
 		return n;
 	}
-	
+
 	@AfterClass
 	public void afterClass() {
 		driver.quit();
