@@ -135,9 +135,13 @@ public class XPath {
 		driver.findElement(By.xpath("//div[@class='account-cart-wrapper']//a[@class='skip-link skip-account']"))
 				.click();
 		driver.findElement(By.xpath("//a[@title='Log Out']")).click();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		String home = "Default welcome msg!";
-		Assert.assertEquals(home.toUpperCase(), driver.findElement(By.xpath("//p[@class='welcome-msg']")).getText());
+//		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		String home = "This is demo site for";
+		home = home.toUpperCase();
+		String check = driver.findElement(By.xpath("//div[@class='page-title']/h2")).getText();
+		Assert.assertEquals(home,check.trim());
+//		String linkHome = "http://live.demoguru99.com/index.php/";
+		
 
 	}
 
