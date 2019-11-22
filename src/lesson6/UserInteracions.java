@@ -11,7 +11,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.interactions.Action;
+
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -29,7 +29,7 @@ public class UserInteracions {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
-//	@Test
+	@Test
 	public void TC_02_ClickAndHoldeElement() {
 		driver.get("http://jqueryui.com/resources/demos/selectable/display-grid.html");
 		List<WebElement> items = driver.findElements(By.xpath("//li[@class='ui-state-default ui-selectee']")); 
@@ -52,7 +52,7 @@ public class UserInteracions {
 		List<WebElement> itemsIsSelected = driver.findElements(By.xpath("//li[@class='ui-state-default ui-selectee ui-selected']"));
 		Assert.assertEquals(itemsIsSelected.size(),4);
 	}
-	@Test
+//	@Test
 	public void TC_04_DoubleClick () {
 		driver.get("https://automationfc.github.io/basic-form/index.html");
 		WebElement btn = driver.findElement(By.xpath("//button[text()='Double click me']")); 
