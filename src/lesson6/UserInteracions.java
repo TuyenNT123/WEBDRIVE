@@ -28,6 +28,17 @@ public class UserInteracions {
 		driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
+//	@Test
+	public void TC_01_MoveMouseToElement() {
+		driver.get("https://www.myntra.com/");
+		WebElement profile = driver.findElement(By.xpath("//span[text()='Profile']"));
+		Actions action = new Actions(driver);
+		action.moveToElement(profile).perform();
+		WebElement itmeLogIn = driver.findElement(By.xpath("//a[text()='log in']"));
+		WebElement itmeLogout = driver.findElement(By.xpath("//div[text()=' Logout ']"));
+		itmeLogout.click();
+		Assert.assertTrue(itmeLogIn.isDisplayed());
+	}
 
 	@Test
 	public void TC_02_ClickAndHoldeElement() {
@@ -53,12 +64,38 @@ public class UserInteracions {
 		Assert.assertEquals(itemsIsSelected.size(),4);
 	}
 //	@Test
-	public void TC_04_DoubleClick () {
+	public void TC_04_DoubleClick () throws Exception {
 		driver.get("https://automationfc.github.io/basic-form/index.html");
 		WebElement btn = driver.findElement(By.xpath("//button[text()='Double click me']")); 
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", btn);
+	    Thread.sleep(500); 
 		Actions action = new Actions(driver);
-		
 		action.doubleClick(btn).perform();
+		WebElement text = driver.findElement(By.xpath("//p[@id='demo']"));
+		Assert.assertEquals(text.getText(), "Hello Automation Guys!");
+	}
+//	@Test
+	public void TC_05_RightClickToElement () {
+		driver.get("http://swisnl.github.io/jQuery-contextMenu/demo.html");
+		WebElement btn = driver.findElement(By.xpath("//span[text()='right click me']"));
+		Actions action = new Actions(driver);
+		action.contextClick(btn).perform();
+		WebElement quitBtn = driver.findElement(By.xpath("//li[@class='context-menu-item context-menu-icon context-menu-icon-quit']"));
+		action.moveToElement(quitBtn).perform();
+		Assert.assertTrue(quitBtn.getAttribute("class").contains("context-menu-visible"));
+		
+		
+	}
+//	@Test
+	public void TC_06_DragAndDropElement () {
+		driver.get("https://demos.telerik.com/kendo-ui/dragdrop/angular");
+		WebElement cycleSmall = driver.findElement(By.xpath("//div[@id='draggable']"));
+		WebElement cycleBig = driver.findElement(By.xpath("//div[@id='droptarget']"));
+		Actions action = new Actions(driver);
+		action.dragAndDrop(cycleSmall, cycleBig).build().perform();
+		String actual = cycleBig.getText();
+		Assert.assertEquals(actual, "You did great!");
+		
 	}
 	@AfterClass
 	public void afterClass() {
