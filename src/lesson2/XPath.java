@@ -1,4 +1,4 @@
-package lession2;
+package lesson2;
 
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;
@@ -25,7 +25,7 @@ public class XPath {
 		driver = new FirefoxDriver();
 		String url = "http://live.demoguru99.com/";
 		driver.get(url);
-		// wait định ngầm; thời gian chờ cho 1 element hienr thị trên màn hinh. Cái hàm
+		// wait định ngầm; th�?i gian ch�? cho 1 element hienr thị trên màn hinh. Cái hàm
 		// này sẽ ảnh hưởng đến hàm findElement & findElements
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}

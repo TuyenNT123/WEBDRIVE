@@ -1,4 +1,4 @@
-package lession4;
+package lesson4;
 
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;

@@ -1,4 +1,4 @@
-package lession1;
+package lesson1;
 
 import org.testng.annotations.Test;
 import org.testng.annotations.AfterClass;
